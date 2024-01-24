@@ -25,7 +25,13 @@ namespace Components
         {
             Actor.TryGetComponent(out Animator, true);
 
-            if (Animator != null && Animator.runtimeAnimatorController is AnimatorOverrideController overrideController)
+            if (Animator == null)
+            {
+                Debug.LogError($"we have problems with animator on {Actor}  with container = {Actor.ContainerID}");
+                return;
+            }
+
+            if (Animator.runtimeAnimatorController is AnimatorOverrideController overrideController)
                 State = AnimatorManager.GetAnimatorState(overrideController.runtimeAnimatorController.name);
             else
                 State = AnimatorManager.GetAnimatorState(Animator.runtimeAnimatorController.name);
