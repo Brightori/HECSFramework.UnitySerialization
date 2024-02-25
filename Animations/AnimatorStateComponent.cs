@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Components
 {
-    public sealed partial class AnimatorStateComponent : IHaveActor, IInitable, IInitAfterView, IDisposable
+    public sealed partial class AnimatorStateComponent : IHaveActor, IInitAfterView, IDisposable
     {
         public Actor Actor { get; set; }
         [HideInInspectorCrossPlatform]
@@ -13,7 +13,7 @@ namespace Components
         [HideInInspectorCrossPlatform]
         public bool Activated;
 
-        public void Init()
+        public override void Init()
         {
             if (Owner.ContainsMask<ViewReferenceGameObjectComponent>())
                 return;
