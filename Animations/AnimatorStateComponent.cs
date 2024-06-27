@@ -15,7 +15,7 @@ namespace Components
 
         public override void Init()
         {
-            if (Owner.ContainsMask<ViewReferenceGameObjectComponent>())
+            if (Owner.ContainsMask<ViewReferenceGameObjectComponent>() || Owner.ContainsMask<ViewDependencyTagComponent>())
                 return;
 
             SetupAnimatorState();
@@ -23,7 +23,13 @@ namespace Components
 
         public void SetupAnimatorState()
         {
-            Actor.TryGetComponent(out Animator, true);
+
+            if (Owner.TryGetComponent(out ViewReadyTagComponent viewReadyTagComponent))
+            {
+                Animator =  viewReadyTagComponent.View.GetComponent<Animator>();
+            }
+            else
+                Actor.TryGetComponent(out Animator, true);
 
             if (Animator == null)
             {
