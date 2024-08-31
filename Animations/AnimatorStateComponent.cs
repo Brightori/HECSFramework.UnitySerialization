@@ -51,6 +51,12 @@ namespace Components
             Animator.SetTrigger(id);
         }
 
+        public void ResetAnimator()
+        {
+            Animator.Rebind();
+            Animator.Update(0);
+        }
+
         public void InitAfterView()
         {
             SetupAnimatorState();
