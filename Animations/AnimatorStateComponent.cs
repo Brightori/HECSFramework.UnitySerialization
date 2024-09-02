@@ -23,10 +23,9 @@ namespace Components
 
         public void SetupAnimatorState()
         {
-
             if (Owner.TryGetComponent(out ViewReadyTagComponent viewReadyTagComponent))
             {
-                Animator =  viewReadyTagComponent.View.GetComponent<Animator>();
+                Animator =  viewReadyTagComponent.View.GetComponentInChildren<Animator>();
             }
             else
                 Actor.TryGetComponent(out Animator, true);
