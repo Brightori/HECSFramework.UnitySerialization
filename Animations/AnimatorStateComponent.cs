@@ -43,6 +43,7 @@ namespace Components
 
             State.SetAnimator(Animator);
             Activated = true;
+            ResetAnimator();
         }
 
         public void SetTrigger(int id)
