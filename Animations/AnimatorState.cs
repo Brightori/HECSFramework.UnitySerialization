@@ -5,35 +5,21 @@ namespace HECSFramework.Serialize
 {
     public partial class AnimatorState
     {
+        private Animator animator;
+
         public void SetAnimator(Animator animator)
         {
-            SetAnimatorToAnimParameter(boolParameters, animator);
-            SetAnimatorToAnimParameter(floatParameters, animator);
-            SetAnimatorToAnimParameter(intParameters, animator);
+            this.animator = animator;
         }
 
-        private void SetAnimatorToAnimParameter<T>(Dictionary<int, T> dictionary, Animator animator) where T: AnimatorParameter
+        partial void SetBoolUnityPart(int id, bool value)
         {
-            foreach (var anim in dictionary)
-            {
-                anim.Value.Animator = animator;
-            }
+            animator.SetBool(id, value);
         }
 
-        public void ApplyParametersToAnimator()
+        partial void SetFloatUnityPart(int id, float value)
         {
-            foreach (var parameter in boolParameters.Values)
-            {
-                parameter.Animator.SetBool(parameter.ParameterAnimatorHashCode, parameter.Value);
-            }
-            foreach (var parameter in floatParameters.Values)
-            {
-                parameter.Animator.SetFloat(parameter.ParameterAnimatorHashCode, parameter.Value);
-            }
-            foreach (var parameter in intParameters.Values)
-            {
-                parameter.Animator.SetInteger(parameter.ParameterAnimatorHashCode, parameter.Value);
-            }
+            animator.SetFloat(id, value);
         }
     }
 }
