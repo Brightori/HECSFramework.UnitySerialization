@@ -17,9 +17,9 @@ namespace HECSFramework.Serialize
             animator.SetBool(id, value);
         }
 
-        partial void SetFloatUnityPart(int id, float value)
+        partial void SetFloatUnityPart(int id, float value, float deltaTime, float damp)
         {
-            animator.SetFloat(id, value);
+            animator.SetFloat(id, value, damp, deltaTime);
         }
     }
 }
