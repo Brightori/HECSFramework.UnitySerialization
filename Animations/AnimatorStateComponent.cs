@@ -48,6 +48,7 @@ namespace Components
 
         public void ResetAnimator()
         {
+            Animator.enabled = true;
             Animator.Rebind();
             Animator.Update(0);
         }
