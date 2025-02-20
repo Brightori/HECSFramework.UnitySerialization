@@ -13,6 +13,9 @@ namespace HECSFramework.Core
         }
         
         [IgnoreMember]
+#if JsonSerialize
+        [Newtonsoft.Json.JsonIgnore]
+#endif
         public Vector3 AsVector
             => new Vector3(X, Y, Z);
 
