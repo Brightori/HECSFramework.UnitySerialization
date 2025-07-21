@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using HECSFramework.Core;
 using HECSFramework.Unity;
 using UnityEngine;
@@ -56,6 +57,25 @@ namespace Components
         public void InitAfterView()
         {
             SetupAnimatorState();
+        }
+
+        public async UniTask WaitStateComplete(int layer = 0)
+        {
+            var currentState = Animator.GetCurrentAnimatorStateInfo(layer).shortNameHash;
+            var owner = Owner.GetAliveEntity();
+
+            while (owner.IsAlive)
+            {
+                var state = Animator.GetCurrentAnimatorStateInfo(layer);
+
+                if (state.normalizedTime >= 1)
+                    break;
+
+                if (state.shortNameHash != currentState)
+                    break;
+
+                await UniTask.DelayFrame(1);
+            }
         }
 
         public void Reset()
