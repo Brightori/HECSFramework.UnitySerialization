@@ -4,6 +4,9 @@ namespace HECSFramework.Core
 {
     public partial struct Vector2Serialize
     {
+        public static implicit operator Vector2Serialize(Vector2 data) { return new Vector2Serialize(data); }
+        public static implicit operator Vector2(Vector2Serialize data) { return data.AsVector(); }
+
         public Vector2Serialize(Vector2 source)
         {
             X = source.x;
